@@ -27,7 +27,6 @@ static const char *const autostart[] = {
 	"xset","r", "rate","200","35", NULL,
 	"nm-applet", NULL,
 	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", NULL,
-	"dunst", NULL,
 	NULL /* terminate */
 };
 
@@ -73,8 +72,7 @@ static const Layout layouts[] = {
 static char dmenumon[8]; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *rofi[]  = { "rofi","-show","drun", NULL };
-static const char *kitty[]  = { "kitty", NULL };
+static const char *alacritty[]  = { "alacritty", NULL };
 /* Fungsi pembantu untuk navigasi workspace/tag */
 void viewnext(const Arg *arg) {
 	unsigned int current = selmon->tagset[selmon->seltags];
@@ -99,8 +97,8 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_j,      viewnext,       {0} },
 	{ MODKEY,                       XK_k,      viewprev,       {0} },
-	{ MODKEY,                       XK_d,      spawn,          {.v = rofi} },
-	{ MODKEY,             					XK_t, 		 spawn,          {.v = kitty } },
+	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd} },
+	{ MODKEY,             					XK_t, 		 spawn,          {.v = alacritty} },
 	{ MODKEY,                       XK_l,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_h,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
@@ -108,7 +106,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_v,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_v,      setlayout,      {.v = &layouts[1]} },
 //	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-//	{ MODKEY,                       XK_p,      incnmaster,     {.i = -1 } },
+//	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_Left,   setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_Right,  setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
